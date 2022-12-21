@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+      <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qdu3m0mwb7"></script>
+      <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=qdu3m0mwb7&submodules=geocoder"></script>
+      <link rel="stylesheet" href="{% static 'theme.css' %}?after">
+      <title>담당 업소 정보</title>
+    </head>
+    <body>
+      <nav class ='nav'>
+        <span class="position">
+          <span class = 'logo' >
+            <a href="{% url 'manager:list' %}">
+              {% load static %}
+              <img src="{%static 'logo.jpg' %}"  alt="" width="140" height="45" />
+            </a>
+          </span>
+          <span class="navright">
+            <div class ='snt'>업무 관리 시스템</div>
+            {% if user.is_authenticated %}
+            <span>{{user.nickname}}매니저님 환영합니다.</span>
+            <button onclick="location.href='/logout/'" >로그 아웃</button>
+            {% endif %}
+          </span> 
+        </span>
+      </nav>
+      <main class = 'main'>
+        <hr> 
+        <div class = 'content'>
+            {% if request.user.is_authenticated %}
+              {% if lodge.account != '미정'%}
+                <ol class = "text">
+                  <li>업소명: {{ lodge.account }}</li>
+                  <li>주소: {{ address }}</li>
+                  <li>담당자 이름: {{ lodge.officer_name }}</li>
+                  <li>담당자 연락처: {{ lodge.officer_contact }}</li>
+
+                </ol>
+                <hr class="hr">
+                <div id="map" style="width:100%;height:400px;"></div>
+                
+
+                  <script>
+                  // 현재 위치 좌표 찾기  
+                  var options = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                  };
+
+                  function success(pos) {
+                    var crd = pos.coords;
+
+                    console.log('Your current position is:');
+                    console.log(`Latitude : ${crd.latitude}`);
+                    console.log(`Longitude: ${crd.longitude}`);
+                    console.log(`More or less ${crd.accuracy} meters.`);
+                  }
+
+                  function error(err) {
+                    console.warn(`ERROR(${err.code}): ${err.message}`);
+                  }
+
+                  navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+                  let posts = [{x: Number("{{ x }}"),
+                                y: Number("{{ y }}")}]
+                  var mapOptions = {
+                      center: new naver.maps.LatLng(posts[0].y,posts[0].x ),
+                      zoom: 18
+                  };
+                  
+                  var map = new naver.maps.Map('map', mapOptions);
+                  var marker = new naver.maps.Marker({
+                      position: new naver.maps.LatLng(posts[0].y, posts[0].x),
+                      map: map
+                      });
+                  var marker2 = new naver.maps.Marker({
+                      position: new naver.maps.LatLng(crd.latitude, crd.longitude),
+                      map: map
+                      });
+
+                  
+                  </script>
+                <form id= "checlist_link" method="post" action="{% url 'manager:link' lodge_id %}">
+                  {% csrf_token %}
+                  <div class="text" style="text-align: center;">
+                    <span>모니터링하는 객실 번호를 입력해 주세요:</span>
+                    <input required type="text" id = 'room_num' name="room_num"/>
+                  </div>
+                  <input type="submit"  class = "btnSubmit hover3" value = "모니터링 시작"/>
+                </form> 
+              {% else %}
+                <p>운영팀에 문의 부탁 드립니다.</p>
+              {% endif %}
+              <button class = "btnSubmit hover3" onclick="location.href='/manager/schedule/'">스케쥴 확인</button>
+
+            {% endif %}          
+        </div>
+      </main>
+    </body>
+</html>

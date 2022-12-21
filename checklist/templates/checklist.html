@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+      <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qdu3m0mwb7"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+      <style>
+        @font-face {
+          font-family: 'GangwonEduPowerExtraBoldA';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+          }
+        *{padding:0;margin:0}
+        .position{display:inherit; margin: auto;align-items: center; text-align: center;}
+        .nav{margin-top: 10px; margin-bottom: 10px;padding: 10px;}
+        .logo{text-align: left; display:inline-block; align-items: left;}
+        .navright{text-align: right; display: inline-block; align-items: right;}
+        .block{text-align: center; display: block;margin-left: 200px; margin-right: 200px;}
+        .snt{text-align: right; font-family: 'GangwonEduPowerExtraBoldA';}
+        .hr{margin-top: 30px; margin-bottom: 30px;}
+        .question{text-decoration:none;color:black;font-size:15px; text-align: center; margin-top: 30px; font-size: 60px;font-family: 'GangwonEduPowerExtraBoldA';}   
+        .main {background: #FAFAFA; min-height: 700px;}
+        .qna_li{text-align: center;}
+        .box{margin:auto; padding:10px;border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;}
+        .btnSubmit{width:300px; margin:auto;margin-top: 30px; display:block; height: 60px;font-family: 'GangwonEduPowerExtraBoldA';
+          border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: #07004f; color: #FFFFFF;
+        font-size: larger;cursor: pointer;  transition:all 0.9s, color 0.3;}
+        .btnSubmit:hover{color:#FFF;}
+        .hover3:hover{
+        box-shadow: 0 80px 0 0  rgba(0,0,0,0.5) inset, 
+                    0 -80px 0 0 rgba(0,0,0,0.5) inset;
+        }
+        .btn_before{width:300px; margin:auto;margin-top: 30px; display:block; height: 60px;font-family: 'GangwonEduPowerExtraBoldA';
+        border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: gray; color: black;
+      font-size: larger;}
+        .banner{width:300px; margin:auto;margin-top: 30px; display:block; height: 60px; text-align: middle;
+          font-family: 'GangwonEduPowerExtraBoldA';line-height: 60px;
+          background-color: #07004f; color: #FFFFFF;
+          font-size: larger;}
+        .btn_qna_o{width:150px; margin-top: 30px; height: 150px;font-family: 'GangwonEduPowerExtraBoldA'; font-size: 60px;
+        border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: rgb(15, 176, 77); color: white;
+      float: left; margin-right: 10px;}
+        .btn_qna_x{width:150px; margin-top: 30px; height: 150px;font-family: 'GangwonEduPowerExtraBoldA'; font-size: 60px;
+        border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: rgb(226, 26, 26); color: white;
+      float: right;}
+        .qna{font-family: 'GangwonEduPowerExtraBoldA'; }
+        .p{text-align: center; margin-top: 30px; margin-bottom: 30px; display: block; font-family: 'GangwonEduPowerExtraBoldA';}
+        .block{text-align: center; display: block;margin-left: 200px; margin-right: 200px;}
+        .index{font-family: 'GangwonEduPowerExtraBoldA';}
+        label { display: inline-block; padding: 5px;position: relative;}
+        label input {float: inherit;}
+        label span { border: 1px solid #ccc; width: 130px; height: 130px; position: absolute; overflow: hidden;
+                    line-height: 160px; text-align: center; border-radius: 100%; font-size: 60pt; left: 9%; top: 23%;
+                    align-items: middle; font-display: block; display: inline-block; vertical-align: middle;}
+        input.btn_qna_o:checked+span {background: rgb(134, 241, 175); border-color: rgb(134, 241, 175);}
+        input.btn_qna_x:checked+span {background: rgb(237, 115, 134); border-color: rgb(237, 115, 134);}
+        </style>
+        <title>체크리스트</title>
+    <body>
+      <nav class ='nav'>
+        <span class="position">
+          <span class = 'logo' >
+            <a href="{% url 'manager:list' %}">
+              {% load static %}
+              <img src="{%static 'logo.jpg' %}"  alt="" width="140" height="45" />
+            </a>
+          </span>
+          <span class="navright">
+            <div class ='snt'>업무 관리 시스템</div>
+            {% if user.is_authenticated %}
+            <span>{{user.nickname}}님 환영합니다.</span>
+            <button onclick="location.href='/logout/'" >로그 아웃</button>
+            {% endif %}
+          </span> 
+        </span>
+      </nav>
+      <main class = 'main'>
+        <hr>     
+        <div class = 'box'>
+          <form id = 'form_checklist' action="{% url 'checklist:post' lodge_id=lodge_id room_num=room_num %}" method ='post'>
+            <hr class = "hr">
+            <ol class = "qna">
+              {% csrf_token %}
+              {% for id, question, division, place in infos %}
+              <li class="qna_li" id="{{id}}">
+                <div  class = "banner"><a>{{division}}</a> : <a>{{place}}</a></div>
+                <p class = 'question'>{{ question }}</p>
+                <div>
+                  <label><input required class="btn_qna_o" name="q{{id}}" type="radio" value="O" /><span>O</span></label>
+                  <label><input required class="btn_qna_x" name="q{{id}}" type="radio" value="X" /><span>X</span></label>
+                </div>
+                <input class = "btn_before" type="button" value="뒤로 가기" />
+              </li>
+              {% endfor %}
+            </ol>
+            <hr class="hr">
+              <input  class = "btnSubmit hover3" type = 'submit' value="모니터링 완료" onclick="btnFinish()"/>
+          </form>
+        </div>
+      </main>
+
+      <!-- 자바스립트 부분 -->
+      <script>
+        $('.btn_before').click(function() {
+          const target = $(this).closest('li');
+          // console.log('target : ', target);
+          // console.log('현재 id : ', target.attr('id'));
+          // console.log('다음 요소 : ', target.next().attr('id'));
+
+          var scrollPosition = target.prev().offset().top;
+          window.scrollTo({top:scrollPosition, behavior:'smooth'});
+        })
+
+        $('.btn_qna_o').click(function() {
+          const target = $(this).closest('li');
+
+          var scrollPosition = target.next().offset().top;
+          window.scrollTo({top:scrollPosition, behavior:'smooth'});
+        })
+
+        $('.btn_qna_x').click(function() {
+          const target = $(this).closest('li');
+
+          var scrollPosition = target.next().offset().top;
+          window.scrollTo({top:scrollPosition, behavior:'smooth'});
+        })
+
+
+        function btnFinish(){
+                  alert('모니터링이 완료되었습니다.');
+                  }
+      
+      </script>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+      <link rel="stylesheet" href="{% static 'theme.css' %}?after">    
+      <title>매니저 정보</title>
+    </head>
+    <body>
+      <nav class ='nav'>
+        <span class="position">
+          <span class = 'logo' >
+            <a href="{% url 'manager:list' %}">
+              {% load static %}
+              <img src="{%static 'logo.jpg' %}"  alt="" width="140" height="45" />
+            </a>
+          </span>
+          <span class="navright">
+            <div class ='snt'>업무 관리 시스템</div>
+            {% if user.is_authenticated %}
+            <span>{{user.nickname}}매니저님 환영합니다.</span>
+            <button onclick="location.href='/logout/'" >로그 아웃</button>
+            {% endif %}
+          </span> 
+        </span>
+      </nav>
+      <main class = 'main'>
+            <hr> 
+            
+            <div class = 'content'>
+                {% if request.user.is_authenticated %}
+                <ol class="text">
+                  <li>매니저 성함 :  {{ request.user.nickname }}</li>
+                  <li>주소 :  {{ request.user.address }}</li>
+                  <li>연락처 :  {{ request.user.phone_number }}</li>
+                  <li>매니저 계정명 :  {{ manager.account }}</li>
+                  <li>배정 지역 :  {{ manager.area }}</li>
+                  <li>모니터링  시간 :  {{ monitoring_time }}분</li>
+                  <li>담당 업소 갯수 :  {{ monitoring_cnt }} 곳</li>
+                </ol>
+                
+                {% endif %}
+                
+            </div>
+            <button class = "btnSubmit hover3" onclick="location.href='/manager/'">메인 화면</button>  
+      </main>
+    </body>
+</html>

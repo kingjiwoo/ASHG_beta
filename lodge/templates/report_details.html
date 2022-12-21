@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta
+        name="viewport"
+         content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+      <link rel="stylesheet" href="{% static 'theme.css' %}?after">
+      <title>리포트_디테일</title>
+    </head>
+    <body>
+      <nav class ='nav'>
+        <span class="position">
+          <span class = 'logo' >
+            <a href="{% url 'manager:list' %}">
+              {% load static %}
+              <img src="{%static 'logo.jpg' %}"  alt="" width="140" height="45" />
+            </a>
+          </span>
+          <span class="navright">
+            <div class ='snt'>업무 관리 시스템</div>
+            {% if user.is_authenticated %}
+            <span>{{user.nickname}}님 환영합니다.</span>
+            <button onclick="location.href='/logout/'" >로그 아웃</button>
+            {% endif %}
+          </span> 
+        </span>
+      </nav>
+      <main class = 'content'>
+        <hr>
+        <box class = 'text'>
+          {% if rooms_cnt == 0 %}
+            <h1>관리가 완벽합니다.</h1>
+          {% else %}
+            <h2> 호실 별 미흡 사항</h2>
+            <br>
+            <table>
+              <thead>
+                <tr>
+                  <th>호실</th> <th>분류</th> <th>질문</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for val,list in questions %}
+                  {% for id, question in list%}
+                    {% if id < 11 %}
+                    <tr>
+                      <th>{{val}}</th> <th>안전:객실</th> <th>{{question}}</th>
+                    </tr>
+                    {% elif id < 21 %}
+                    <tr>
+                      <th>{{val}}</th> <th>안전:욕실</th> <th>{{question}}</th>
+                    </tr>
+                    {% elif id < 33 %}
+                    <tr>
+                      <th>{{val}}</th> <th>청결:객실</th> <th>{{question}}</th>
+                    </tr>
+                    {% else %}
+                    <tr>
+                      <th>{{val}}</th> <th>청결:욕실</th> <th>{{question}}</th>
+                    </tr>
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+              
+            </table>
+          {% endif %}
+          
+        </box>
+        <button class = "btnSubmit hover3" onclick="location.href='/lodge/'">메인 화면</button>            
+      </main>
+    </body>
+</html>

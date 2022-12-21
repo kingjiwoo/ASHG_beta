@@ -1,0 +1,74 @@
+/* 사용 폰트 */
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+@font-face {
+        font-family: 'SpoqaHanSansNeo-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
+    /* 로그인 기능 관련 class */
+  .id{text-decoration:none;color:black;font-size:15px; text-align: center; margin-top: 30px; }
+  .password{text-decoration:none;color:black;font-size:15px; text-align: center; margin-bottom: 30px; }
+  .index{font-family: 'GangwonEduPowerExtraBoldA';}
+  .logintext{text-align: center; margin-top: 30px; margin-bottom: 30px; display: block; font-family: 'GangwonEduPowerExtraBoldA';}
+    /* 네비 게이션바 아래 메인 화면  */
+  .main {background: #FAFAFA; min-height: 700px;}
+  .box{padding:10px;margin-left: 200px; margin-right: 200px;border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;}
+  /* 버튼 디자인 */
+  .btnSubmit{width:300px; margin:auto;margin-top: 30px; display:block; height: 60px;font-family: 'GangwonEduPowerExtraBoldA';
+    border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: #07004f; color: #FFFFFF;
+  font-size: larger;cursor: pointer;  transition:all 0.9s, color 0.3;}
+  .btnSubmit:hover{color:#FFF;}
+  .hover3:hover{
+  box-shadow: 0 80px 0 0  rgba(0,0,0,0.5) inset, 
+              0 -80px 0 0 rgba(0,0,0,0.5) inset;
+  }
+  .btn_before{width:300px; margin:auto;margin-top: 30px; display:block; height: 60px;font-family: 'GangwonEduPowerExtraBoldA';
+    border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: gray; color: black;
+  font-size: larger;}
+  .btn_qna_o{width:200px; margin-top: 30px; height: 200px;font-family: 'GangwonEduPowerExtraBoldA'; font-size: 100px;
+  border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: rgb(15, 176, 77); color: white;
+  float: left; margin-right: 10px;}
+  .btn_qna_x{width:200px; margin-top: 30px; height: 200px;font-family: 'GangwonEduPowerExtraBoldA'; font-size: 100px;
+  border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: rgb(226, 26, 26); color: white;
+  float: right;}
+  /* navbar 관련 */
+  .position{display:inline-block; margin: auto;}
+  .nav{display: inline-block;margin-top: 10px; margin-bottom: 10px;}
+  .logo{text-align: center; display:inline-block;align-items: center;}
+  .navright{text-align: right; display: inline-block; align-items: right;margin-left: 50px;}
+  .block{text-align: center; display: block;margin-left: 200px; margin-right: 200px;}
+  .snt{text-align: right; font-family: 'GangwonEduPowerExtraBoldA';}
+  /* 본문 내용 관련 */
+  .content{align-items: center; margin: auto; text-align: center;font-size: 20px;font-family:'SpoqaHanSansNeo-Regular' ;}
+  .text{text-align: left; display: inline-block;margin-right:240px; margin-top: 10px; margin-bottom: 30px; 
+    font-size: 20px; font-family:'SpoqaHanSansNeo-Regular' ;}
+  /* 리포트 메인 안전 관련 항목 */
+  .resultSafety{align-items: center; margin: auto; text-align: center;display: inline-block;
+    font-size: 20px; font-family:'SpoqaHanSansNeo-Regular' ;}
+  .boxSafety1{background-color: rgb(15, 176, 77);width: 400px; padding:5px; border:solid blue; margin: 40px;}
+  .boxSafety2{border: 2px;background-color: rgb(226, 26, 26);}
+  /* 미흡 사항 표기 란 */
+  th,td{padding: 7px;}
+  table{align-items: center;}
+  /* 체크리스트 관련 */
+  .banner{width:300px; margin:auto;margin-top: 30px; display:block; height: 60px; text-align: middle;
+    font-family: 'GangwonEduPowerExtraBoldA';line-height: 60px;
+    background-color: #07004f; color: #FFFFFF;
+    font-size: larger;}
+  .qna{font-family: 'GangwonEduPowerExtraBoldA'; }
+  .qna_li{text-align: center;}
+  .question{text-decoration:none;color:black;font-size:15px; text-align: center; margin-top: 30px; font-size: 60px;font-family: 'GangwonEduPowerExtraBoldA';}   
+  label { display: inline-block; padding: 5px;position: relative;}
+  label input {float: inherit;}
+  label span { border: 1px solid #ccc; width: 130px; height: 130px; position: absolute; overflow: hidden;
+                line-height: 160px; text-align: center; border-radius: 100%; font-size: 60pt; left: 9%; top: 23%;
+                align-items: middle; font-display: block; display: inline-block; vertical-align: middle;}
+  input.btn_qna_o:checked+span {background: rgb(134, 241, 175); border-color: rgb(134, 241, 175);}
+  input.btn_qna_x:checked+span {background: rgb(237, 115, 134); border-color: rgb(237, 115, 134);}
+  

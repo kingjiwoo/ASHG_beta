@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <style>
+          @font-face {
+            font-family: 'GangwonEduPowerExtraBoldA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            }
+          @font-face {
+            font-family: 'SpoqaHanSansNeo-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            }
+          *{padding:0;margin:0}
+          .position{display:inherit; margin: auto;align-items: center; text-align: center;}
+          .nav{margin-top: 10px; margin-bottom: 10px;padding: 10px;}
+          .logo{text-align: left; display:inline-block; align-items: left;}
+          .navright{text-align: right; display: inline-block; align-items: right;}
+          .block{text-align: center; display: block;margin-left: 200px; margin-right: 200px;}
+          .snt{text-align: right; font-family: 'GangwonEduPowerExtraBoldA';}
+          .boxSafety1{background-color:rgb(134, 241, 175); color:black;width: 400px; padding: 50px; margin: 40px;}
+          .boxSafety2{background-color:rgb(237, 115, 134); color:black;width: 400px; padding: 50px; margin: 40px;}      
+          .main {background: #FAFAFA; min-height: 700px;}
+          .btnSubmit{width:300px; margin:auto;margin-top: 30px; display:block; height: 60px;font-family: 'GangwonEduPowerExtraBoldA';
+            border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: #07004f; color: #FFFFFF;
+          font-size: larger;cursor: pointer;  transition:all 0.9s, color 0.3;}
+          .btnSubmit:hover{color:#FFF;}
+          .hover3:hover{
+          box-shadow: 0 80px 0 0  rgba(0,0,0,0.5) inset, 
+                      0 -80px 0 0 rgba(0,0,0,0.5) inset;
+          }
+          .text{align-items: center; text-align: center; display: inline-block;margin-right:240px; margin-top: 10px; margin-bottom: 30px; 
+            font-size: 20px; font-family:'SpoqaHanSansNeo-Regular' ;}
+          .content{align-items: center; margin: auto; text-align: center;}
+          .resultSafety{align-items: center; margin: auto; text-align: center;display: inline-block;
+            font-size: 20px; font-family:'SpoqaHanSansNeo-Regular' ;}
+        </style>
+      <title>모니터링 기본</title>
+    </head>
+    <body>
+      <nav class ='nav'>
+        <span class="position">
+          <span class = 'logo' >
+            <a href="{% url 'manager:list' %}">
+              {% load static %}
+              <img src="{%static 'logo.jpg' %}"  alt="" width="140" height="45" />
+            </a>
+          </span>
+          <span class="navright">
+            <div class ='snt'>업무 관리 시스템</div>
+            {% if user.is_authenticated %}
+            <span>{{user.nickname}}님 환영합니다.</span>
+            <button onclick="location.href='/logout/'" >로그 아웃</button>
+            {% endif %}
+          </span> 
+        </span>
+      </nav>
+      <main class = 'content'>
+        <hr> 
+        <div class ="resultSafety">
+          <h3 >안전(불법 장치) 점검 결과</h3>
+          {% if user.is_authenticated %}
+          {% if test == 0 %}
+            <h3>아직 실시된 모니터링이 없습니다.</h3>
+          {% else %}
+            {% if len_safe == cnt_safe %}
+            <div class = 'boxSafety1'>
+              '안전'
+            </div>
+            <p>{{user.nickname}}님 업소는 안전합니다.</p>
+            {% else %}
+            <div class = 'boxSafety2'>
+              '위험'
+            </div>
+            <p>탐지 결과에 대한 확인이 필요합니다. 본사 운영팀으로 문의주세요.</p>
+          {% endif %}
+          
+          {% endif %}
+          {% endif %}
+        </div>
+        <br>
+        {% if test == 0 %}
+        {% else %}
+          <h3 class ="text">청결(침구,위생 등) 점검 결과</h3>
+          {% autoescape off %}
+          {{ fig_clean }}
+          {% endautoescape %}
+        {% endif %}
+
+        <button class = "btnSubmit hover3" onclick="location.href='/lodge/report/clean/'">세부사항 확인</button>
+
+        <button class = "btnSubmit hover3" onclick="location.href='/lodge/'">뒤로 가기</button>
+      </main>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+      <link rel="stylesheet" href="{% static 'theme.css' %}?after">    
+      <title>오늘의 일정</title>
+    </head>
+    <body>
+      <nav class ='nav'>
+        <span class="position">
+          <span class = 'logo' >
+            <a href="{% url 'manager:list' %}">
+              {% load static %}
+              <img src="{%static 'logo.jpg' %}"  alt="" width="140" height="45" />
+            </a>
+          </span>
+          <span class="navright">
+            <div class ='snt'>업무 관리 시스템</div>
+            {% if user.is_authenticated %}
+            <span>{{user.nickname}}매니저님 환영합니다.</span>
+            <button onclick="location.href='/logout/'" >로그 아웃</button>
+            {% endif %}
+          </span> 
+        </span>
+      </nav>
+      <main class = 'main'>
+            <hr> 
+            <div class = 'content'>
+                {% if request.user.is_authenticated %}
+                {% if test == 0 %}
+                <h3>아직 등록된 일정이 없습니다.</h3>
+                {% else %}
+                <table class = "text">
+                  <thead>
+                    <tr>
+                      <th>일정순서</th> <th>업소 계정명</th> <th> 시간</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td> <td> <a href="/manager/schedule/target1">{{lodge_1.account}}</a></td> <td>{{timelines.tl1}}</td>
+                    </tr>
+                    <tr>
+                      <td>2</td> <td> <a href="/manager/schedule/target2">{{lodge_2.account}}</a></td> <td>{{timelines.tl2}}</td>
+                    </tr>
+                    <tr>
+                      <td>3</td> <td> <a href="/manager/schedule/target3">{{lodge_3.account}} </a></td> <td>{{timelines.tl3}}</td>
+                    </tr>
+                    <tr>
+                      <td>4</td> <td> <a href="/manager/schedule/target4">{{lodge_4.account}}</a></td> <td>{{timelines.tl4}}</td>
+                    </tr>
+                    <tr>
+                      <td>5</td> <td> <a href="/manager/schedule/target5">{{lodge_5.account}}</a></td> <td>{{timelines.tl5}}</td>
+                    </tr>
+                    <tr>
+                      <td>6</td> <td> <a href="/manager/schedule/target6">{{lodge_6.account}}</a></td> <td>{{timelines.tl6}}</td>
+                    </tr>
+                    <tr>
+                      <td>7</td> <td> <a href="/manager/schedule/target7">{{lodge_7.account}}</a></td> <td>{{timelines.tl7}}</td>
+                    </tr>
+                    <tr>
+                      <td>8</td> <td> <a href="/manager/schedule/target8">{{lodge_8.account}}</a></td> <td>{{timelines.tl8}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                {% endif %}
+                {% endif %}
+              <button class = "btnSubmit hover3" onclick="location.href='/manager/'">메인 화면</button>  
+            </div>
+            
+      </main>
+    </body>
+</html>

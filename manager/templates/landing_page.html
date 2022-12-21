@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+      <link rel="stylesheet" href="{% static 'theme.css' %}?after">      
+      <title>매니저 menu</title>
+    </head>
+    <body>
+        <nav class ='nav'>
+            <span class="position">
+              <span class = 'logo' >
+                <a href="{% url 'manager:list' %}">
+                  {% load static %}
+                  <img src="{%static 'logo.jpg' %}"  alt="" width="140" height="45" />
+                </a>
+              </span>
+              <span class="navright">
+                <div class ='snt'>업무 관리 시스템</div>
+                {% if user.is_authenticated %}
+                <span>{{user.nickname}}매니저님 환영합니다.</span>
+                <button onclick="location.href='/logout/'" >로그 아웃</button>
+                {% endif %}
+              </span> 
+            </span>
+        </nav>
+          <main class = 'main'>
+            <hr> 
+            <div class = 'content'>
+                <button onclick="location.href='/manager/info/'" class = "btnSubmit hover3" >매니저 정보 확인</button>
+                <button onclick="location.href='/manager/schedule/'" class = "btnSubmit hover3" >오늘의 일정</button>
+                
+            </div>
+          </main>
+    </body>
+</html>

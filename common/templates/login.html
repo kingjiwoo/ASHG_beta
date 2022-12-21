@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+      <link rel="stylesheet" href="{% static 'theme.css' %}?after">
+      <style>
+        .box{border:1px solid; color:black;padding:10px;border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;}
+      </style>    
+      <title> 안심하GO 업무 관리 시스템 </title>
+    </head>
+    <body >
+      <nav class ='nav'>
+        <span class="position">
+          <span class = 'logo' >
+            <a href="{% url 'manager:list' %}">
+              {% load static %}
+              <img src="{%static 'logo.jpg' %}"  alt="" width="140" height="45" />
+            </a>
+          </span>
+          <span class="navright">
+            <div class ='snt'>업무 관리 시스템</div>
+            {% if user.is_authenticated %}
+            <span>{{user.nickname}}매니저님 환영합니다.</span>
+            <button onclick="location.href='/logout/'" >로그 아웃</button>
+            {% endif %}
+          </span> 
+        </span>
+      </nav>
+      <main class = 'main'>
+        <hr>
+        <p class = 'logintext'>업무 관리 시스템</p>
+        {% block content %}
+        <div class='box'>
+            <form method="post">
+            {% csrf_token %}
+            {% include 'form_errors.html' %}
+            <div class="id">
+                <label for="username", class = "index">사용자ID</label>
+                <input type="text" class="form-control" name="username" id="username"
+                      value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="password">
+                <label for="password", class = "index">비밀번호</label>
+                <input type="password" class="form-control" name="password" id="password"
+                      value="{{ form.password.value|default_if_none:'' }}">
+            </div>
+            <button type="submit" class ="btnSubmit hover3">로그인</button>
+            </form>
+        </div>
+        {% endblock %}
+
+      </main>
+        
+    </body>
+  </html>
