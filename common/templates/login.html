@@ -9,6 +9,9 @@
       <link rel="stylesheet" href="{% static 'theme.css' %}?after">
       <style>
         .box{border:1px solid; color:black;padding:10px;border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;}
+        .btnSubmit{width:180px;display:inherit; height: 60px;font-family: 'GangwonEduPowerExtraBoldA';
+        border-radius: 30px 30px 30px 30px / 30px 30px 30px 30px;background-color: #07004f; color: #FFFFFF;
+        font-size: larger;cursor: pointer;  transition:all 0.9s, color 0.3;}
       </style>    
       <title> 안심하GO 업무 관리 시스템 </title>
     </head>
@@ -22,7 +25,7 @@
             </a>
           </span>
           <span class="navright">
-            <div class ='snt'>업무 관리 시스템</div>
+            <!-- <div class ='snt'>업무 관리 시스템</div> -->
             {% if user.is_authenticated %}
             <span>{{user.nickname}}매니저님 환영합니다.</span>
             <button onclick="location.href='/logout/'" >로그 아웃</button>
