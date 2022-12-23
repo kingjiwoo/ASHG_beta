@@ -41,6 +41,8 @@
           .content{align-items: center; margin: auto; text-align: center;}
           .resultSafety{align-items: center; margin: auto; text-align: center;display: inline-block;
             font-size: 30px; font-family:'SpoqaHanSansNeo-Regular' ;}
+          .resultClean{align-items: center; margin: auto; text-align: center;display: inline-block;
+            font-size: 30px; font-family:'SpoqaHanSansNeo-Regular' ;}
         </style>
       <title>모니터링 기본</title>
     </head>
@@ -66,34 +68,39 @@
         <hr> 
         <div class ="resultSafety">
           <h3 >안전(불법 장치) 점검 결과</h3>
+          <br>
           {% if user.is_authenticated %}
           {% if test == 0 %}
             <h3>아직 실시된 모니터링이 없습니다.</h3>
           {% else %}
             {% if len_safe == cnt_safe %}
             <div class = 'boxSafety1'>
-              '안전'
+              <b>안전</b>
             </div>
+            <br>
             <p>{{user.nickname}}님 업소는 안전합니다.</p>
             {% else %}
             <div class = 'boxSafety2'>
-              '위험'
+              <b>위험</b>
             </div>
+            <br>
             <p>탐지 결과에 대한 확인이 필요합니다. 본사 운영팀으로 문의주세요.</p>
           {% endif %}
-          
           {% endif %}
           {% endif %}
         </div>
         <br>
-        {% if test == 0 %}
-        {% else %}
-          <h3 class ="text">청결(침구,위생 등) 점검 결과</h3>
-          {% autoescape off %}
-          {{ fig_clean }}
-          {% endautoescape %}
-        {% endif %}
-
+        <br>
+        <div class ="resultClean">
+          <h3 >청결(침구,위생 등) 점검 결과</h3>
+          {% if test == 0 %}
+            <p>아직 시행된 모니터링이 없습니다.</p>
+          {% else %}
+            {% autoescape off %}
+            {{ fig_clean }}
+            {% endautoescape %}
+          {% endif %}
+        </div>
         <button class = "btnSubmit hover3" onclick="location.href='/lodge/report/clean/'">세부사항 확인</button>
 
         <button class = "btnSubmit hover3" onclick="location.href='/lodge/'">뒤로 가기</button>

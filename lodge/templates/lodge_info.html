@@ -36,21 +36,19 @@
                 <li>업소명 :  {{ request.user.nickname }}</li>
                 <li>주소 :  {{ request.user.address }}</li>
                 <li>상세주소 : {{lodge.address}}</li>
-                <li>연락처 :  {{ request.user.phone_number }}</li>
+                <li>업소 연락처 :  {{ request.user.phone_number }}</li>
+                <li>담당자 성명 :  {{ lodge.officer_name }}</li>
+                <li>담당자 연락처 :  {{ lodge.officer_contact }}</li>
                 <li>업소 계정명 :  {{ lodge.account }}</li>
                 <li>최근 계약 연장일 :  {{ lodge.contract_extension }}</li>
                 <li>계약 상태 :  {{ lodge.status }}</li>
                 <li>건물 유형 :  {{ lodge.building_type }}</li>
-                <li>담당자 성명 :  {{ lodge.officer_name }}</li>
-                <li>담당자 연락처 :  {{ lodge.officer_contact }}</li>
                 <li>인증 여부 :  {{ lodge.patent }}</li>
                 <li>인증 등급 :  {{ lodge.grade }}</li>
                 <li>배정 지역 :  {{ lodge.area }}</li>
                 <li>면적 :  {{ lodge.size }}</li>
-                <li>침실 갯수 :  {{ lodge.cnt_bed }}</li>
-                <li>욕실 갯수 :  {{ lodge.cnt_bath }}</li>
+                <li>침실 갯수 :  {{ lodge.cnt_room }}</li>
                 <li>부대시설 :  {{ lodge.facilities }}</li>
-                <li>모니터링 소요시간 :  {{ lodge.monitoring_time }}분</li>
                 <li>최근 모니터링 일시 :  {{ lodge.latest_monitoring }}</li>
               </ol>
                 
