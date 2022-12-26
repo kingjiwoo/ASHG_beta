@@ -1,7 +1,6 @@
 asgiref==3.5.2
 async-timeout==4.0.2
 backports.zoneinfo==0.2.1
-certifi @ file:///C:/b/abs_4f5wo627a3/croots/recipe/certifi_1663615677642/work/certifi
 channels==4.0.0
 channels-redis==4.0.0
 charset-normalizer==2.1.1
@@ -26,7 +25,6 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 kiwisolver==1.4.4
 MarkupSafe==2.1.1
-matplotlib==3.6.2
 msgpack==1.0.4
 numpy==1.23.5
 packaging==21.3
