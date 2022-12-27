@@ -5,6 +5,7 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/usr/src/app/_static
+      # - ./config/nginx/:/etc/nginx/conf.d
     ports:
       - 80:80
     depends_on:
